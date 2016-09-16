@@ -1,2 +1,4 @@
-# torii
+Torii
+=====
+
 A discord to irc gateway
