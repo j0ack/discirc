@@ -39,7 +39,7 @@ class IRCBot(bottom.Client):
     :type config: dict
     """
 
-    COLOR_PREF = '\u00030'
+    COLOR_PREF = '\x03'
     CANCEL = '\u000F'
     
     def __init__(self, config):
@@ -129,7 +129,7 @@ class IRCBot(bottom.Client):
         """
         # set a color for this author
         if source not in self.users:
-            self.users[source] = self.COLOR_PREF + str(random.randint(2, 9))
+            self.users[source] = self.COLOR_PREF + str(random.randint(2, 15))
         format_msg = '<{}{}{}> {}'.format(
             self.users[source],
             source,
