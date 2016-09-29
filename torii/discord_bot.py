@@ -25,9 +25,8 @@ import asyncio
 import discord
 import torii.signals as SIGNALNAMES
 
-from torii.message import Message
 from blinker import signal
-
+from torii.message import Message
 
 __author__ = 'TROUVERIE Joachim'
 

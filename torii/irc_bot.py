@@ -127,14 +127,15 @@ class IRCBot(bottom.Client):
         :param source: Message source
         :param content: Message content
         """
-        # set a color for this author
-        if source not in self.users:
-            self.users[source] = self.COLOR_PREF + str(random.randint(2, 15))
-        format_msg = '<{}{}{}> {}'.format(
-            self.users[source],
-            source,
-            self.CANCEL,
-            content
-        )
-        self.send('PRIVMSG', target=target, message=format_msg)
+        for msg in content.split('\n'):
+            # set a color for this author
+            if source not in self.users:
+                self.users[source] = self.COLOR_PREF + str(random.randint(2, 15))
+            format_msg = '<{}{}{}> {}'.format(
+                self.users[source],
+                source,
+                self.CANCEL,
+                msg
+            )
+            self.send('PRIVMSG', target=target, message=format_msg)
 
