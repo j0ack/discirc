@@ -1,0 +1,18 @@
+{
+    // Discord app token
+    "discordToken": "my_discord_token",
+    // IRC server address
+    "ircServer": "chat.freenode.org",
+    // IRC server port
+    "ircPort": "6667",
+    // IRC SSL use
+    "ircSSl": false,
+    // IRC nick
+    "ircNick": "torii",
+    // Channels maps
+    "mappingChannels": {
+        "discord_chan": "#irc_chan",
+    },
+    // Command chars to not interprete these
+    "commandChars": ["~", "!"]
+}
