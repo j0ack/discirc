@@ -18,15 +18,15 @@
     Discord bot
     -----------
 
-    Discord bot for Torii gateway
+    Discord bot for DiscIRC app
 """
 
 import asyncio
 import discord
-import torii.signals as SIGNALNAMES
+import discirc.signals as SIGNALNAMES
 
 from blinker import signal
-from torii.message import Message
+from discirc.message import Message
 
 __author__ = 'TROUVERIE Joachim'
 

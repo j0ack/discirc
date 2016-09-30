@@ -15,10 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-    Torii launcher
-    --------------
+    DiscIRC launcher
+    ----------------
 
-    Launcher for torii app
+    Launcher for DiscIRC app
 """
 
 import click
@@ -27,8 +27,8 @@ import os.path as op
 import sys
 import json
 
-from torii.discord_bot import DiscordWrapper
-from torii.irc_bot import IRCBot
+from discirc.discord_bot import DiscordWrapper
+from discirc.irc_bot import IRCBot
 
 
 __author__ = 'TROUVERIE Joachim'
@@ -36,10 +36,10 @@ __author__ = 'TROUVERIE Joachim'
 
 @click.command()
 @click.option('-c', '--config', type=click.Path(),
-              help='Alternate config file (default to ~/.toriirc)')
+              help='Alternate config file (default to ~/.discirc)')
 def main(config):
     if not config:
-        config = op.expanduser('~/.toriirc')
+        config = op.expanduser('~/.discirc')
     if not op.exists(config):
         sys.exit(1, 'No config file found')
 

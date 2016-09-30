@@ -18,15 +18,15 @@
     IRC bot
     -------
 
-    IRC bot for Torii gateway
+    IRC bot for DiscIRC app
 """
 
 import bottom
 import random
-import torii.signals as SIGNALNAMES
+import discirc.signals as SIGNALNAMES
 
 from blinker import signal
-from torii.message import Message
+from discirc.message import Message
 
 
 __author__ = 'TROUVERIE Joachim'
@@ -48,7 +48,7 @@ class IRCBot(bottom.Client):
             port=config.get('ircPort', 6667),
             ssl=config.get('ircSsl', False)
         )
-        self.nick = config.get('ircNick', 'torii')
+        self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
         
         self.on('CLIENT_CONNECT', self.on_connect)

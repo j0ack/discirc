@@ -18,7 +18,7 @@ from setuptools import setup, find_packages
 
 __author__ = 'TROUVERIE Joachim'
 __version__ = '0.1'
-__appname__ = 'Torii'
+__appname__ = 'discirc'
 __email__ = 'joachim.trouverie@linoame.fr'
 
 
@@ -36,7 +36,7 @@ setup(
     long_description=open('README.rst').read(),
     install_requires=requirements,
     include_package_data=True,
-    url='http://pythonhosted.org/torii/',
+    url='http://pythonhosted.org/discirc/',
     classifiers=[
         "Development Status :: 4 - Beta",
         "Environment :: Console",
@@ -47,7 +47,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'torii = torii.launcher:main',
+            'discirc = discirc.launcher:main',
         ],
     },
 )
