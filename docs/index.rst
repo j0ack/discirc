@@ -27,4 +27,6 @@ Then simply run **DiscIRC** thanks to the available command::
 Private messages
 ****************
 
-**DiscIRC** handles private messages. You need to prefix your message with a `@User` when sent from **Discord** and with `User:` from IRC. 
+**DiscIRC** handles private messages.
+
+You need to prefix your message with a `@User` when sent from **Discord** and with `User:` when sent from **IRC**. 
