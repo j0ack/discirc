@@ -6,7 +6,7 @@ DiscIRC
 Installation
 ------------
 
-You can install it simply using `pip` (not yet) ::
+You can install it simply using `pip`::
 
   $ pip install discirc
 
