@@ -41,7 +41,7 @@ class IRCBot(bottom.Client):
 
     COLOR_PREF = '\x03'
     CANCEL = '\u000F'
-    
+
     def __init__(self, config):
         super(IRCBot, self).__init__(
             host=config['ircServer'],
@@ -50,7 +50,7 @@ class IRCBot(bottom.Client):
         )
         self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
-        
+
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
         self.on('PRIVMSG', self.on_irc_message)
@@ -60,10 +60,7 @@ class IRCBot(bottom.Client):
         # signals
         self.discord_signal = signal(SIGNALNAMES.DISCORD_MSG)
         self.discord_signal.connect(self.on_discord_message)
-        self.discord_priv_signal = signal(SIGNALNAMES.DISCORD_PRIV_MSG)
-        self.discord_priv_signal.connect(self.on_discord_priv_message)
         self.irc_signal = signal(SIGNALNAMES.IRC_MSG)
-        self.irc_priv_signal = signal(SIGNALNAMES.IRC_PRIV_MSG)
 
     def on_connect(self):
         """On connect event"""
@@ -89,13 +86,13 @@ class IRCBot(bottom.Client):
         data = Message(target, nick, message)
 
         if target != self.nick:
-            self.irc_signal.send(self, data=data)
+            self.irc_signal.send(self, data=data, private=False)
         else:
             words = message.split(':')
             target = words.pop(0)
             content = ' '.join(words)
             data = Message(target, nick, content)
-            self.irc_priv_signal.send(self, data=data)
+            self.irc_signal.send(self, data=data, private=True)
 
     def on_discord_message(self, sender, **kwargs):
         """On Discord message event callback
@@ -103,30 +100,14 @@ class IRCBot(bottom.Client):
         :param sender: Message sender
         """
         message = kwargs['data']
-        chan = self.channels.get(message.channel)
-        user = message.source
+        private = kwargs['private']
+        source = message.source
         content = message.content
-        if chan:
-            self._relay_discord_message(chan, user, content)
+        if not private:
+            target = self.channels.get(message.channel)
+        else:
+            target = message.channel
 
-    def on_discord_priv_message(self, sender, **kwargs):
-        """On Discord private message event callback
-
-        :param sender: Message sender
-        """
-        message = kwargs['data']
-        target = message.channel
-        user = message.source
-        content = message.content
-        self._relay_discord_message(target, user, content)
-
-    def _relay_discord_message(self, target, source, content):
-        """Send discord message
-        
-        :param target: Message target
-        :param source: Message source
-        :param content: Message content
-        """
         for msg in content.split('\n'):
             # set a color for this author
             if source not in self.users:
@@ -138,4 +119,3 @@ class IRCBot(bottom.Client):
                 msg
             )
             self.send('PRIVMSG', target=target, message=format_msg)
-

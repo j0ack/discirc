@@ -22,6 +22,4 @@
 """
 
 DISCORD_MSG = 'discord_msg'
-DISCORD_PRIV_MSG = 'discord_priv_msg'
 IRC_MSG = 'irc_msg'
-IRC_PRIV_MSG = 'irc_priv_msg'
