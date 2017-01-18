@@ -25,7 +25,7 @@ import asyncio
 import discord
 import discirc.signals as SIGNALNAMES
 
-from blinker import signal
+from asyncblink import signal
 from discirc.message import Message
 
 __author__ = 'TROUVERIE Joachim'
@@ -87,7 +87,7 @@ class DiscordWrapper(object):
                 msg = Message(channel, source, content)
                 self.discord_signal.send(self, data=msg, private=False)
 
-    def on_irc_message(self, sender, **kwargs):
+    async def on_irc_message(self, sender, **kwargs):
         """Event on IRC message received
 
         :param message: IRC message
@@ -106,10 +106,10 @@ class DiscordWrapper(object):
 
         if target:
             if self._is_command(message.content):
-                asyncio.async(self.bot.send_message(target, message.content))
+                await self.bot.send_message(target, message.content)
             else:
                 msg = '**<{}>** {}'.format(message.source, message.content)
-                asyncio.async(self.bot.send_message(target, msg))
+                await self.bot.send_message(target, msg)
 
     def _get_user_by_name(self, username):
         """Get Discord user by his name

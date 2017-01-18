@@ -25,7 +25,7 @@ import bottom
 import random
 import discirc.signals as SIGNALNAMES
 
-from blinker import signal
+from asyncblink import signal
 from discirc.message import Message
 
 
