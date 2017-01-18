@@ -50,6 +50,7 @@ class IRCBot(bottom.Client):
         )
         self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
+        self.password = config.get('ircPass')
 
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
@@ -66,6 +67,8 @@ class IRCBot(bottom.Client):
         """On connect event"""
         self.send('NICK', nick=self.nick)
         self.send('USER', user=self.nick, realname='Discord gateway')
+        if self.password:
+            self.send('PASS', password=self.password)
         for chan in self.channels.values():
             self.send('JOIN', channel=chan)
 

@@ -12,7 +12,10 @@
   "ircSSl": false,
 
   "_comments": "IRC nick",
-  "ircNick": "torii",
+  "ircNick": "discirc",
+
+  "_comments": "IRC password [OPTIONAL]",
+  "ircPass": "MyIRCPass",
 
   "_comments": "Channels maps",
   "mappingChannels": {
