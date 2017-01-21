@@ -51,6 +51,7 @@ class IRCBot(bottom.Client):
         self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
         self.password = config.get('ircPass')
+        self.channelPass = config['channelPass']
 
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
@@ -70,7 +71,10 @@ class IRCBot(bottom.Client):
         if self.password:
             self.send('PASS', password=self.password)
         for chan in self.channels.values():
-            self.send('JOIN', channel=chan)
+            if chan not in self.channelPass:
+                self.send('JOIN', channel=chan)
+            else:
+                self.send('JOIN', channel=chan, key=self.channelPass[chan])
 
     def on_ping(self, message, **kwargs):
         """Keep alive server"""

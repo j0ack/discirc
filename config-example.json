@@ -14,14 +14,21 @@
   "_comments": "IRC nick",
   "ircNick": "discirc",
 
-  "_comments": "IRC password [OPTIONAL]",
+  "_comments": "IRC nick password [OPTIONAL]",
   "ircPass": "MyIRCPass",
 
   "_comments": "Channels maps",
   "mappingChannels": {
-    "discord_chan": "#irc_chan",
+    "discord_chan1": "#irc_chan1",
+    "discord_chan2": "#irc_chan2"
   },
 
-  "_comments": "Command chars to not interprete these",
+  "_comments": "IRC channel passwords [OPTIONAL]",
+  "channelPass": {
+      "#irc_chan1": "ChannelPass1",
+      "#irc_chan2": "ChannelPass2"
+  },
+
+  "_comments": "Command chars to not interpret",
   "commandChars": ["~", "!"]
 }
