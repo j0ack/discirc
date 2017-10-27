@@ -56,6 +56,8 @@ class IRCBot(bottom.Client):
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
         self.on('PRIVMSG', self.on_irc_message)
+        self.on('RPL_ENDOFMOTD', self.on_motddone)
+        self.on('ERR_NOMOTD', self.on_motddone)
 
         self.users = dict()
 
@@ -70,6 +72,8 @@ class IRCBot(bottom.Client):
         self.send('USER', user=self.nick, realname='Discord gateway')
         if self.password:
             self.send('PASS', password=self.password)
+
+    def on_motddone(self, message):
         for chan in self.channels.values():
             if chan not in self.channelPass:
                 self.send('JOIN', channel=chan)
