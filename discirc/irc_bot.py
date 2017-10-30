@@ -74,6 +74,9 @@ class IRCBot(bottom.Client):
             self.send('PASS', password=self.password)
 
     def on_motddone(self, message):
+        """On MOTD received or no MOTD available event.
+        Clients should wait with issuing JOIN commands until either of these
+        messages are received."""
         for chan in self.channels.values():
             if chan not in self.channelPass:
                 self.send('JOIN', channel=chan)
