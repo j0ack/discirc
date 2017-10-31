@@ -74,7 +74,7 @@ class IRCBot(bottom.Client):
             self.send('PASS', password=self.password)
 
     def on_motddone(self, message):
-        """On MOTD received or no MOTD available event.
+        """On MOTD received or no MOTD available event. MOTD stands for Message Of The Day, as per RFC 1459.
         Clients should wait with issuing JOIN commands until either of these
         messages are received."""
         for chan in self.channels.values():
