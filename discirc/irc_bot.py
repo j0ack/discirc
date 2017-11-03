@@ -23,6 +23,7 @@
 
 import bottom
 import random
+import textwrap
 import discirc.signals as SIGNALNAMES
 
 from asyncblink import signal
@@ -41,6 +42,9 @@ class IRCBot(bottom.Client):
 
     COLOR_PREF = '\x03'
     CANCEL = '\u000F'
+    # chunck length in letters - actual limit is 512 bytes
+    # set to 256 to anticipate some Unicode chars in the content
+    IRC_MSG_CHUNK_LENGTH = 256
 
     def __init__(self, config):
         super(IRCBot, self).__init__(
@@ -131,4 +135,6 @@ class IRCBot(bottom.Client):
                 self.CANCEL,
                 msg
             )
-            self.send('PRIVMSG', target=target, message=format_msg)
+            chunks = textwrap.wrap(format_msg, self.IRC_MSG_CHUNK_LENGTH, break_long_words=False)
+            for chunk in chunks:
+                self.send('PRIVMSG', target=target, message=chunk)
