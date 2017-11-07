@@ -17,7 +17,7 @@
 from setuptools import setup, find_packages
 
 __author__ = 'TROUVERIE Joachim'
-__version__ = '0.4'
+__version__ = '0.5'
 __appname__ = 'discirc'
 __email__ = 'joachim.trouverie@linoame.fr'
 
@@ -32,7 +32,7 @@ setup(
     packages=find_packages(),
     author=__author__,
     author_email=__email__,
-    description='A Discord to IRC gateway', 
+    description='A Discord to IRC gateway',
     long_description=open('README.rst').read(),
     install_requires=requirements,
     include_package_data=True,
@@ -41,7 +41,7 @@ setup(
         "Development Status :: 4 - Beta",
         "Environment :: Console",
         "Topic :: Communications :: Chat",
-        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",        
+        "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
         "Natural Language :: English",
         "Programming Language :: Python :: 3.5",
     ],
@@ -51,4 +51,3 @@ setup(
         ],
     },
 )
-

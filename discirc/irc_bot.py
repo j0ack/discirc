@@ -74,7 +74,8 @@ class IRCBot(bottom.Client):
             self.send('PASS', password=self.password)
 
     def on_motddone(self, message):
-        """checking if Message Of The Day is done because it may interfere with joining channels"""
+        """Checking if Message Of The Day is done because it may
+        interfere with joining channels"""
         for chan in self.channels.values():
             if chan not in self.channelPass:
                 self.send('JOIN', channel=chan)
