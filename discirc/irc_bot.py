@@ -55,7 +55,7 @@ class IRCBot(bottom.Client):
         self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
         self.password = config.get('ircPass')
-        self.channelPass = config['channelPass']
+        self.channelPass = config.get('channelPass', {})
 
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
