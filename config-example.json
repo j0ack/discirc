@@ -29,6 +29,9 @@
       "#irc_chan2": "ChannelPass2"
   },
 
+  "_comments": "Reconnect automatically when loding IRC connection",
+  "ircAutoReconnect": false,
+
   "_comments": "Command chars to not interpret",
   "commandChars": ["~", "!"]
 }

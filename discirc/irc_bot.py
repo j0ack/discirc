@@ -55,13 +55,15 @@ class IRCBot(bottom.Client):
         self.nick = config.get('ircNick', 'discirc')
         self.channels = config['mappingChannels']
         self.password = config.get('ircPass')
-        self.channelPass = config.get('channelPass', {})
+        self.channel_pass = config.get('channelPass', {})
+        self.reconnect = config.get('ircAutoReconnect', False)
 
         self.on('CLIENT_CONNECT', self.on_connect)
         self.on('PING', self.on_ping)
         self.on('PRIVMSG', self.on_irc_message)
         self.on('RPL_ENDOFMOTD', self.on_motddone)
         self.on('ERR_NOMOTD', self.on_motddone)
+        self.on('CLIENT_DISCONNECT', self.on_disconnect)
 
         self.users = dict()
 
@@ -77,14 +79,19 @@ class IRCBot(bottom.Client):
         if self.password:
             self.send('PASS', password=self.password)
 
+    def on_disconnect(self):
+        """On disconnect event"""
+        if self.reconnect:
+            self.connect()
+
     def on_motddone(self, message):
         """Checking if Message Of The Day is done because it may
         interfere with joining channels"""
         for chan in self.channels.values():
-            if chan not in self.channelPass:
+            if chan not in self.channel_pass:
                 self.send('JOIN', channel=chan)
             else:
-                self.send('JOIN', channel=chan, key=self.channelPass[chan])
+                self.send('JOIN', channel=chan, key=self.channel_pass[chan])
 
     def on_ping(self, message, **kwargs):
         """Keep alive server"""

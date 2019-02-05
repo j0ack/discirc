@@ -17,7 +17,7 @@
 from setuptools import setup, find_packages
 
 __author__ = 'TROUVERIE Joachim'
-__version__ = '0.5'
+__version__ = '0.6'
 __appname__ = 'discirc'
 __email__ = 'joachim.trouverie@linoame.fr'
 
