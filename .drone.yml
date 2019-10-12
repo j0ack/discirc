@@ -1,0 +1,24 @@
+kind: pipeline
+type: docker
+name: build
+
+steps:
+- name: build
+  image: python:3
+  commands:
+  - pip install -U sphinx
+  - cd docs
+  - make html
+
+- name: push
+  image: alpine:latest
+  commands:
+  - apk add -U openssh-client sshpass
+  - sshpass -e scp -r -o StrictHostKeyChecking=no docs/_build/html/* dronessh@joakode.fr:www/blog
+  environment:
+    SSHPASS:
+      from_secret: dronessh
+
+when:
+  branch:
+  - master
