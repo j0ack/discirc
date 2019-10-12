@@ -14,7 +14,7 @@ steps:
   image: alpine:latest
   commands:
   - apk add -U openssh-client sshpass
-  - sshpass -e scp -r -o StrictHostKeyChecking=no docs/_build/html/* dronessh@joakode.fr:www/blog
+  - sshpass -e scp -r -o StrictHostKeyChecking=no docs/_build/html/* dronessh@joakode.fr:www/discirc
   environment:
     SSHPASS:
       from_secret: dronessh
