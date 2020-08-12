@@ -106,10 +106,10 @@ class DiscordWrapper(object):
 
         if target:
             if self._is_command(message.content):
-                await self.bot.send_message(target, message.content)
+                await target.send(message.content)
             else:
                 msg = '**<{}>** {}'.format(message.source, message.content)
-                await self.bot.send_message(target, msg)
+                await target.send(msg)
 
     def _get_user_by_name(self, username):
         """Get Discord user by his name
